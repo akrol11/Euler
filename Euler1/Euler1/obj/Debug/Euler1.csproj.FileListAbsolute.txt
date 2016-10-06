@@ -1,6 +1,0 @@
-C:\Users\alexk1.BKTB\Documents\Visual Studio 2012\Projects\Euler\Euler1\Euler1\bin\Debug\Euler1.exe.config
-C:\Users\alexk1.BKTB\Documents\Visual Studio 2012\Projects\Euler\Euler1\Euler1\bin\Debug\Euler1.exe
-C:\Users\alexk1.BKTB\Documents\Visual Studio 2012\Projects\Euler\Euler1\Euler1\bin\Debug\Euler1.pdb
-C:\Users\alexk1.BKTB\Documents\Visual Studio 2012\Projects\Euler\Euler1\Euler1\obj\Debug\Euler1.csprojResolveAssemblyReference.cache
-C:\Users\alexk1.BKTB\Documents\Visual Studio 2012\Projects\Euler\Euler1\Euler1\obj\Debug\Euler1.exe
-C:\Users\alexk1.BKTB\Documents\Visual Studio 2012\Projects\Euler\Euler1\Euler1\obj\Debug\Euler1.pdb

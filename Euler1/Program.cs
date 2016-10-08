@@ -74,39 +74,66 @@ namespace Euler1
              *  How to trim: Need to remember combinations that can be duplicated
              * 
             */
+
+            var ourSet = new int[] {1, 3, 6, 8, 10, 11};
+
+            int sizeSet = ourSet.Length;
+            int sizeSubset = 3;
+            
             long minSum = 0;
-            for (long i = 1; i < 51; ++i)
-                minSum += (i*i);
+            for (long i = 0; i < sizeSubset; ++i)
+                minSum += ourSet[i];
             Console.WriteLine("The min sum is {0}", minSum);
 
             long maxSum = 0;
-            for (long i = 100; i > 49; --i)
-                maxSum += (i*i);
+            for (long i = sizeSet; i > sizeSubset-1; --i)
+                maxSum += ourSet[i-1];
             Console.WriteLine("The max sum is {0}", maxSum);
 
             //Min sum = 42925
             //Max sum = 297925
 
-            var originalSet = new int[100];
-            for (int i = 1; i < 101; i++)
-            {
-                originalSet[i - 1] = i*i;
-                Console.Write("a[{0}]={1},", i-1, originalSet[i-1]);
-            }
+            //var originalSet = new int[100];
+            //for (int i = 1; i < 101; i++)
+            //{
+            //    originalSet[i - 1] = i*i;
+            //    Console.Write("a[{0}]={1},", i-1, originalSet[i-1]);
+            //}
 
             // brute force: array of 300000 fill up with 0's
-
-            var sums = new long[300000];
+            var summands = new bool[sizeSet];
+            var sums = new long[maxSum];
             
             // numOfOperand
-            int maxSubsetSize = 20;
             int curSubsetSize = 0;
-            int curSum;
             
-            for (int i = 1; i < 300001; i++)
+            int foundSum = 0;
+            for (int i = minSum; i < maxSum+1; i++)
             {
-                if( sums[i-1] > 0 )
+                // start looking
+                foundSum = 0;
+                int curInd = 0;
+                int curSum = 0;
+                int indUsed = 1;
+
+                summands[curInd] = true;
+                
+                int numOfTimesFound = 0;
+                while (numOfTimesFound < 2)
+                {
+                    curSum += ourSet[i];
                     Console.Write("a[{0}]={1},", i - 1, sums[i - 1]);
+                    if (indUsed == sizeSubset)
+                        numOfTimesFound += (curSum == i ? 1 : 0);
+                    else
+                    {
+                        if ((curInd + indUsed < sizeSet) && (curSum < maxSum))
+                        {
+                            curInd = pickNextIndex(i);
+                            ++indUsed;
+                        }
+                    }
+                } 
             }
 
         }

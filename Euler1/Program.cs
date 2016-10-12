@@ -39,7 +39,7 @@ namespace Euler1
                         break;
                     case 201:
                         //CalculateEuler201();
-                        CycleThroughSubsets(3, 6);
+                        CycleThroughSubsets();
                         break;
                     default:
                         Console.WriteLine("Problem {0} has not been solved.", param);
@@ -139,65 +139,91 @@ namespace Euler1
 
         }
 
-        static void CycleThroughSubsets(int sizeOfSubset, int sizeOfSet)
+        static void CycleThroughSubsets()
         {
-            if (sizeOfSubset > sizeOfSet)
+            var ourSet = new int[] {1, 2, 3, 4, 5, 6};
+            const int sizeOfSubset = 3;
+            int sizeOfSet = ourSet.Length;
+
+            //build min max arrays
+            var minArray = new int[sizeOfSet + 1];
+            var maxArray = new int[sizeOfSet + 1];
+
+            for (int i = 1; i < minArray.Length; i++)
             {
-                Console.WriteLine("Subset of size {0} is larger than the set {1}", sizeOfSubset, sizeOfSet);
-                return;
+                minArray[i] += minArray[i-1] + ourSet[i-1];
+                maxArray[i] += maxArray[i-1] + ourSet[minArray.Length - i-1];
             }
 
-            if (sizeOfSubset == 0)
-                return;
-
-            var subsetIndArray = new int[sizeOfSubset+1];
-
-            // start
-            subsetIndArray[1] = 1;
-            int curSubsetCount = 1;
-            int curLargestElem = 1;
+            var sumArray = new int[maxArray[sizeOfSet]];
+           
 
             bool done = false;
 
-            while (!done)
+            for (int sum = minArray[sizeOfSubset]; sum < maxArray[sizeOfSubset]; sum++)
             {
-                Console.WriteLine("Number of elements: {0}; the largest element: {1}", curSubsetCount, curLargestElem);
+                var subsetIndArray = new int[sizeOfSubset + 1];
 
-                if (curSubsetCount < sizeOfSubset && subsetIndArray[curSubsetCount] < sizeOfSet)
-                {
-                    ++curLargestElem;
-                    ++curSubsetCount;
-                    subsetIndArray[curSubsetCount] = curLargestElem;
+                // start
+                subsetIndArray[1] = 1;
+                int curSubsetCount = 1;
+                int curLargestElem = 1;
+                int curSum = ourSet[curLargestElem-1];
 
-                    //Console.WriteLine("Size of subset increased by 1 to {0}. New element is {1}.", curSubsetCount,curLargestElem);
-                }
-                else if (subsetIndArray[curSubsetCount] < sizeOfSet)
+                while (!done)
                 {
-                    ++curLargestElem;
-                    subsetIndArray[curSubsetCount] = curLargestElem;
-                }
-                else if (subsetIndArray[curSubsetCount] >= sizeOfSet)
-                {
-                    //need to retreat ones
-                    if (curSubsetCount == 1)
-                        done = true;
-                    else
+                    if (curSum == sum)
                     {
+                        ++sumArray[sum];
+                        if (sumArray[sum] > 1)
+                            break;
+                    }
+
+                    // retreat
+                    while (subsetIndArray[curSubsetCount] >= sizeOfSet ||
+                           sizeOfSet - subsetIndArray[curSubsetCount] < sizeOfSubset - curSubsetCount)
+                    {
+                        //nowhere to retreat
+                        if (curSubsetCount == 1)
+                        {
+                            done = true;
+                            break;
+                        }
+
+                        curSum -= ourSet[subsetIndArray[curSubsetCount]-1];
+
                         subsetIndArray[curSubsetCount] = 0;
                         --curSubsetCount;
                         curLargestElem = subsetIndArray[curSubsetCount] + 1;
                         subsetIndArray[curSubsetCount] = curLargestElem;
+                        curSum += ourSet[curLargestElem - 1];
                     }
-                }
-                else if (curSubsetCount < sizeOfSubset)
-                {
-                    //
-                    ++curLargestElem;
-                    subsetIndArray[curSubsetCount] = curLargestElem;
-                }
-                else
-                    done = true;
 
+                    // last element
+                    if (curSubsetCount == sizeOfSubset)
+                    {
+                        curSum -= ourSet[subsetIndArray[curSubsetCount]-1];
+                        ++curLargestElem;
+                        subsetIndArray[curSubsetCount] = curLargestElem;
+                        curSum += ourSet[curLargestElem-1];
+                    }
+
+                    //building up summands
+                    while (curSubsetCount < sizeOfSubset && subsetIndArray[curSubsetCount] < sizeOfSet)
+                    {
+                        ++curLargestElem;
+                        ++curSubsetCount;
+                        subsetIndArray[curSubsetCount] = curLargestElem;
+
+                        curSum += ourSet[curLargestElem-1];
+                    }
+
+                    for (int j = 1; j < sizeOfSubset + 1; j++)
+                    {
+                        Console.Write("{0} + ", ourSet[subsetIndArray[j] - 1]);
+                    }
+                    Console.WriteLine(" = {0}", curSum);
+                }
             }
         }
     }

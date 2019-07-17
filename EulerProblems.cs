@@ -41,102 +41,6 @@ namespace Euler1
                         //CalculateEuler201();
                         CycleThroughSubsets();
                         break;
-                    case 60:
-                        Euler60.solveEuler60();
-                        break;
-                    case 161:
-                        var triominoes = new Euler161_Triominoes();
-                        long counter = 0;
-                        long answer = 0;
-                        //answer = triominoes.SolveTriominoes(1,9, ref counter);
-                        //Console.WriteLine("Number of ways to solve 2x9 trinomies is {0}. Solved in {1} steps.", answer, counter);
-                        //counter = 0;
-                        //answer = triominoes.SolveTriominoes(2,9, ref counter);
-                        //Console.WriteLine("Number of ways to solve 4x9 trinomies is {0}. Solved in {1} steps.", answer, counter);
-                     
-                        //counter = 0;
-                        //answer = triominoes.SolveTriominoes(4,3, ref counter);
-                        //Console.WriteLine("Number of ways to solve 8x3 trinomies is {0}. Solved in {1} steps.", answer, counter);
-
-                        //var board2 = new Board(2, 9);
-                        //answer = triominoes.SolveTriominoesWithBoard(board2);
-                        //Console.WriteLine("Number of ways to solve 2x9 trinomies is {0}.", answer);
-                        
-                        var board3 = new Board(6, 3);
-                        answer = triominoes.SolveTriominoesWithBoard(board3);
-                        Console.WriteLine("Number of ways to solve 6x3 trinomies is {0}.", answer);
-
-                        answer = triominoes.SolveEuler161(6,3);
-                        Console.WriteLine("Number of ways to solve 6x3 trinomies is {0}.", answer);
-
-                        var board4 = new Board(8, 3);
-                        answer = triominoes.SolveTriominoesWithBoard(board4);
-                        Console.WriteLine("Number of ways to solve 8x3 trinomies is {0}.", answer);
-
-                        answer = triominoes.SolveEuler161(8,3);
-                        Console.WriteLine("Number of ways to solve 8x3 trinomies is {0}.", answer);
-
-                        var board41 = new Board(10, 3);
-                        answer = triominoes.SolveTriominoesWithBoard(board41);
-                        Console.WriteLine("Number of ways to solve 10x3 trinomies is {0}.", answer);
-
-                        answer = triominoes.SolveEuler161(10,3);
-                        Console.WriteLine("Number of ways to solve 10x3 trinomies is {0}.", answer);
-
-                        var board5 = new Board(12, 3);
-                        answer = triominoes.SolveTriominoesWithBoard(board5);
-                        Console.WriteLine("Number of ways to solve 12x3 trinomies is {0}.", answer);
-
-                        answer = triominoes.SolveEuler161(12,3);
-                        Console.WriteLine("Number of ways to solve 12x3 trinomies is {0}.", answer);
-
-                         var board6 = new Board(16, 3);
-                        answer = triominoes.SolveTriominoesWithBoard(board6);
-                        Console.WriteLine("Number of ways to solve 16x3 trinomies is {0}.", answer);
-
-                        answer = triominoes.SolveEuler161(16,3);
-                        Console.WriteLine("Number of ways to solve 16x3 trinomies is {0}.", answer);
-
-                         var board7 = new Board(6, 6);
-                        answer = triominoes.SolveTriominoesWithBoard(board7);
-                        Console.WriteLine("Number of ways to solve 6x6 trinomies is {0}.", answer);
-
-                        answer = triominoes.SolveEuler161(6,6);
-                        Console.WriteLine("Number of ways to solve 6x6 trinomies is {0}.", answer);
-
-                       var board8 = new Board(8, 6);
-                        answer = triominoes.SolveTriominoesWithBoard(board8);
-                        Console.WriteLine("Number of ways to solve 8x6 trinomies is {0}.", answer);
-
-                        //answer = triominoes.SolveEuler161(8,6);
-                        //Console.WriteLine("Number of ways to solve 8x6 trinomies is {0}.", answer);
-
-                        var board9 = new Board(6, 9);
-                        answer = triominoes.SolveTriominoesWithBoard(board9);
-                        Console.WriteLine("Number of ways to solve 6x9 trinomies is {0}.", answer);
-
-                        answer = triominoes.SolveEuler161(6,9);
-                        Console.WriteLine("Number of ways to solve 6x9 trinomies is {0}.", answer);
-
-
-                        
-                        //var board5 = new Board(8, 6);
-                        //answer = triominoes.SolveTriominoesWithBoard(board5);
-                        //Console.WriteLine("Number of ways to solve 8x3 trinomies is {0}.", answer);
-
-                        //var watch = System.Diagnostics.Stopwatch.StartNew();
-                        
-                        //answer = triominoes.SolveEuler161(3);
-
-                        //watch.Stop();
-                        //var elapsedMs = watch.ElapsedMilliseconds;
-                        //Console.WriteLine("{0} solutions in {1} miliseconds:", answer, elapsedMs);
-                    
-                     //   answer = triominoes.SolveTriominoes(3, ref counter);
-                     //   Console.WriteLine("Number of ways to solve 6x9 trinomies is {0}. Solved in {1} steps.", answer, counter);
-                     //   answer = triominoes.SolveTriominoes(4, ref counter);
-                     //   Console.WriteLine("Number of ways to solve 8x9 trinomies is {0}. Solved in {1} steps.", answer, counter);
-                        break;
                     default:
                         Console.WriteLine("Problem {0} has not been solved.", param);
                         break;
@@ -202,13 +106,13 @@ namespace Euler1
             var sums = new long[maxSum];
             
             // numOfOperand
-            //int curSubsetSize = 0;
+            int curSubsetSize = 0;
             
-            //int foundSum = 0;
+            int foundSum = 0;
             for (long i = minSum; i < maxSum+1; i++)
             {
                 // start looking
-               // foundSum = 0;
+                foundSum = 0;
                 int curInd = 0;
                 int curSum = 0;
                 int indUsed = 1;

@@ -1,0 +1,9 @@
+*.pdb
+*.exe
+*.exe.config
+*.exe.manifest
+*.suo
+*.cache
+**/obj/Debug
+**/obj/Release
+**/TemporaryGeneratedFile*
